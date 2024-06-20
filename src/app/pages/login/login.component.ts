@@ -1,21 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
 import {ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 import { UserServiceService } from '../../services/userService/user-service.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule],
+  imports: [MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, MatProgressBarModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   constructor(private userService: UserServiceService) {}
+
+  isLoading: Signal<boolean> = this.userService.isLoadingUser
 
   validatePasswordMatch = (control: AbstractControl): {[key: string]: any} | null => {
     const password = this.profileForm?.get('password')?.value as string;

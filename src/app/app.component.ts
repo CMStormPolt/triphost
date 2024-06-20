@@ -1,4 +1,4 @@
-import { Component, Signal, effect } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import { HeaderComponent } from './components/header/header/header.component';

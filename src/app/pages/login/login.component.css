@@ -31,3 +31,7 @@ mat-card-footer {
     font-size: 0.9rem;
     text-align: center;
 }
+
+mat-progress-bar {
+    margin-top: 5px;
+}

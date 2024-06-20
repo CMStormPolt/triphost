@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <mat-card appearance="outlined">
+        <form [formGroup]="profileForm"  (ngSubmit)="onSubmit()">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+                <div>{{profileForm.errors}}</div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email:</mat-label>
+                    <input id="email" matInput placeholder="Enter your email" formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                    <mat-label>Password:</mat-label>
+                    <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+                    <button
+                        type="button"
+                        mat-icon-button
+                        matSuffix
+                        (click)="clickEvent($event)"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()"
+                    >
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+              @if (isSignUp()) {
+                  <mat-form-field appearance="outline">
+                        <mat-label>Repeat Password:</mat-label>
+                        <input matInput [type]="hide() ? 'password' : 'text'" formControlName="repeatPassword"/>
+                    </mat-form-field>
+                } 
+              @if (isSignUp()) {
+                  <mat-form-field appearance="outline">
+                        <mat-label>Name:</mat-label>
+                        <input matInput  formControlName="name"/>
+                    </mat-form-field>
+                } 
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-fab extended
+                [disabled]="!profileForm.valid"
+                type="submit"
+                >
+                {{isSignUp() ? 'Create Account' : 'Enter'}}
+                <mat-icon iconPositionEnd>exit_to_app</mat-icon>
+            </button>
+        </mat-card-actions>
+    </form>
+    <mat-card-footer>
+        @if (isSignUp()){
+            <button mat-button (click)="signUpClick($event)">Go back to login</button>
+        } @else {
+            <p>Don't have an account? <button mat-button (click)="signUpClick($event)">Sign up!</button></p>
+        }
+    </mat-card-footer>
+    </mat-card>
+</div>
+
+<!-- (click)="clickEvent($event)"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide()" -->

@@ -1,0 +1,26 @@
+<mat-toolbar>
+    <nav>
+        <mat-divider vertical/>
+        <a routerLink="">Dashboard</a>
+        <mat-divider vertical/>
+        <a routerLink="/browse">Browse</a>
+    </nav>
+    <div class="right-wrapper">
+        <span>{{user()?.name}}</span>
+        <button mat-icon-button  aria-label="settings button">
+            <mat-icon>settings</mat-icon>
+        </button>
+        <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button> -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLogOutClick($event)">
+            <span>Sign out</span>
+            <mat-icon iconPositionEnd>logout</mat-icon>
+        </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

@@ -1,0 +1,28 @@
+mat-toolbar {
+    background-color: #d7e3ff;
+    justify-content: space-between;
+}
+
+mat-divider {
+    width: 2px;
+    background-color: black;
+    margin: 0px 5px;
+}
+
+nav {
+    display: flex;
+}
+
+nav a {
+    font-size: 1.1rem;
+}
+
+.right-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.right-wrapper span:first-child {
+    font-size: 1.1rem;
+}
+

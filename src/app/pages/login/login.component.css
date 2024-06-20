@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px;
+}
+
+mat-card {
+    padding: 20px;
+}
+
+mat-card-title {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field button {
+    margin-right: 5px;
+}
+
+mat-card-actions button {
+    width: 100%;
+}
+
+mat-card-footer {
+    font-size: 0.9rem;
+    text-align: center;
+}

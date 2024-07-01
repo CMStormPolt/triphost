@@ -1,4 +1,4 @@
-import { Component, signal, Signal } from '@angular/core';
+import { Component, signal, Signal, WritableSignal } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
@@ -8,6 +8,7 @@ import {ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { UserServiceService } from '../../services/userService/user-service.service';
+import { LoginServerError } from '../../types/serverResults/loginResult.interface';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
   constructor(private userService: UserServiceService) {}
 
   isLoading: Signal<boolean> = this.userService.isLoadingUser
+  submitResultText: WritableSignal<string> = signal<string>('')
 
   validatePasswordMatch = (control: AbstractControl): {[key: string]: any} | null => {
     const password = this.profileForm?.get('password')?.value as string;
@@ -78,10 +80,22 @@ export class LoginComponent {
     }
   }
 
+  handleUnsuccessfulLogin() {
+
+  }
+
   async onSubmit() {
     const { email, password, name } = this.profileForm.value
     if(!this.isSignUp()) {
       const result = await this.userService.loggIn(email!, password!)
+      if (!result.successful){
+        if(result.serverError === LoginServerError.wrongUser){
+          this.submitResultText.set('Invalid email or password');
+        } else if (result.serverError === LoginServerError.internalServerError){
+          this.submitResultText.set('There was a problem trying to log you in. Please try again in a few moments');
+        }
+      }
+      console.log(result);
       //TODO: handle failed login
     } else {
       const result = await this.userService.signUp({

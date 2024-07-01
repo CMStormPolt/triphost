@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Cookies from 'js-cookie';
 
 import { User } from '../../types/user.interface';
+import { LoginResult, LoginServerError } from '../../types/serverResults/loginResult.interface';
 import { DbServiceService } from '../dataBaseService/db-service.service';
 import defaultDb from '../dataBaseService/db.json';
 
@@ -43,16 +44,21 @@ export class UserServiceService {
      return this.currentUser.asReadonly();
   }
 
-  async loggIn(email: string, password: string): Promise<boolean> {
+  async loggIn(email: string, password: string): Promise<LoginResult> {
     const existingUser = await this.db.getFromCollection<User>('users', 'email', email)
     if(existingUser && password === (existingUser as User).password){
       Cookies.set('user', JSON.stringify(existingUser));
       this.currentUser.set(existingUser as User);
       this.loadingUser.set(false);
       this.router.navigateByUrl('');
-      return true
+      return {
+        successful: true
+      };
     }
-    return false
+    return {
+      successful: false,
+      serverError: LoginServerError.wrongUser
+    }
   }
 
   async loggOut(): Promise<void> {

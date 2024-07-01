@@ -69,7 +69,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-fab extended
-                    [disabled]="!profileForm.valid"
+                    [disabled]="!profileForm.valid || isLoading()"
                     type="submit"
                     >
                     {{isSignUp() ? 'Create Account' : 'Enter'}}
@@ -77,6 +77,11 @@
                 </button>
             </mat-card-actions>
         </form>
+        @if (submitResultText()) {
+            <div class="submitResultTextContainer">
+                <mat-error>{{submitResultText()}}</mat-error>
+            </div>
+        }
         <mat-card-footer>
             @if (isSignUp()){
                 <button mat-button (click)="signUpClick($event)">Go back to login</button>

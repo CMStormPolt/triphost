@@ -39,3 +39,8 @@ mat-progress-bar {
 mat-form-field {
     padding-bottom: 20px;
 }
+
+.submitResultTextContainer {
+    max-width: 270px;
+    text-align: center;
+}

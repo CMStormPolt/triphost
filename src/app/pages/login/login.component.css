@@ -35,3 +35,7 @@ mat-card-footer {
 mat-progress-bar {
     margin-top: 5px;
 }
+
+mat-form-field {
+    padding-bottom: 20px;
+}
